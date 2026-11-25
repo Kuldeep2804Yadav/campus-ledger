@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Track student expenses, manage budgets, and explore monthly spending.">
+<title>Campus Ledger · Student Expense Tracker</title>
+<link rel="stylesheet" href="styles.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <a class="brand" href="#overview"><span class="brand-mark" data-icon="wallet"></span><span>Campus<span class="brand-accent">Ledger</span><small>STUDENT EXPENSE TRACKER</small></span></a>
+    <nav aria-label="Main navigation">
+      <a href="#overview" data-page="overview"><span data-icon="grid"></span>Overview</a>
+      <a href="#transactions" data-page="transactions"><span data-icon="list"></span>Transactions</a>
+      <a href="#budgets" data-page="budgets"><span data-icon="target"></span>Budgets</a>
+      <a href="#reports" data-page="reports"><span data-icon="chart"></span>Reports</a>
+    </nav>
+    <div class="local"><span data-icon="lock"></span><div><strong>Browser storage</strong><small>Data stays on this device</small></div></div>
+  </aside>
+  <main>
+    <header class="topbar">
+      <span class="section-name" id="section-name"></span>
+      <div class="top-actions">
+        <label class="month-picker"><span data-icon="calendar"></span><span class="sr-only">Report month</span><input id="month" type="month" min="1000-01" max="9999-12"></label>
+        <button class="button primary" id="add"><span data-icon="plus"></span>Add transaction</button>
+      </div>
+    </header>
+    <div class="content" id="content"></div>
+  </main>
+</div>
+<dialog id="transaction-dialog" aria-labelledby="transaction-heading">
+  <form id="transaction-form">
+    <div class="dialog-head"><h2 id="transaction-heading">Add transaction</h2><button type="button" class="icon-button" data-close aria-label="Close">×</button></div>
+    <label>Transaction type<select name="type"><option value="expense">Expense</option><option value="income">Income</option></select></label>
+    <label>Description<input name="description" required maxlength="80" placeholder="e.g. Lunch at the canteen"></label>
+    <div class="fields"><label>Amount (₹)<input name="amount" type="number" min="0.01" max="99999999" step="0.01" required placeholder="0.00"></label><label>Date<input name="date" type="date" min="1000-01-01" max="9999-12-31" required></label></div>
+    <label>Category<select name="category" required></select></label>
+    <div class="form-actions"><button type="button" class="button secondary" data-close>Cancel</button><button class="button primary">Save transaction</button></div>
+  </form>
+</dialog>
+<dialog id="delete-dialog" aria-labelledby="delete-heading">
+  <form id="delete-form">
+    <div class="dialog-head"><h2 id="delete-heading">Delete transaction?</h2><button type="button" class="icon-button" data-close aria-label="Close">×</button></div>
+    <p>The selected transaction will be removed from your records.</p>
+    <div class="form-actions"><button type="button" class="button secondary" data-close>Cancel</button><button class="button danger">Delete transaction</button></div>
+  </form>
+</dialog>
+<div id="notice" role="status" aria-live="polite"></div>
+</body>
+</html>
